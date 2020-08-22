@@ -23,14 +23,6 @@ class WorldMap:
         np.save("map_raw.npy", self.map)
         np.save("map.npy", dilated)
 
-    def load_population_density_map(self):
-        maps = np.clip(np.loadtxt("/home/david/Schreibtisch/PycharmProjects/CoViD19/population/gpw_v4_population_density_rev11_2020_2pt5_min.asc", skiprows=6), 0, 1)
-        resized = cv2.resize(maps, (4000, 2000), cv2.INTER_NEAREST)
-        self.map = (resized > 0).astype(dtype="uint8")*255
-        cv2.imshow("wdm", self.map)
-        cv2.waitKey()
-        np.save("map_nasa.npy", self.map)
-
 
 def load(path):
     maps = np.load(path)
@@ -60,6 +52,5 @@ if __name__ == "__main__":
     # wm.create(0.3333)
     # wm.load("map.npy")
     # wm.show_map(wm.load("map_edited.npy"))
-    wm.load_population_density_map()
     wm.erode_dilate(wm.load("map.npy"), 1, 1000)
     wm.show_map(wm.load("map_edited.npy"))
