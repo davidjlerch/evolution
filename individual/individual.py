@@ -7,5 +7,7 @@ class Individual:
         self.type = None
 
     def birth(self):
-
+        pass
+    
     def move(self):
+        pass
